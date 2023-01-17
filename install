@@ -1,0 +1,36 @@
+#!/bin/bash
+sudo apt install python-pip -y
+mkdir -p dev/catkin_ws/src 
+cd dev/catkin_ws/src
+
+pip install bosdyn-client bosdyn-mission bosdyn-api bosdyn-core
+git clone https://github.com/ROM-robotics/spot_ros.git
+#roslaunch spot_viz view_model.launch
+
+
+# charm
+#git clone https://github.com/pranshutople/champ
+#sudo apt install -y python-rosdep
+git clone --recursive https://github.com/chvmp/champ
+git clone https://github.com/chvmp/champ_teleop
+cd ..
+rosdep install --from-paths src --ignore-src -r -y
+
+# charm/robots
+cd src
+git clone https://github.com/chvmp/robots
+# go to robots/configs/spot_config/configs/
+# check robots/install_descriptions and install
+rm -rf spot_ros
+git clone -b gazebo https://github.com/chvmp/spot_ros
+cd ..
+rosdep install --from-paths src --ignore-src -r -y
+
+#36:28
+
+
+
+
+
+
+
